@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Page link
 
-`https://678d735504bb72a99309b39d--incomparable-naiad-778dbd.netlify.app/`
+[Form page](https://678d735504bb72a99309b39d--incomparable-naiad-778dbd.netlify.app/)
 
 ## Development server
 
