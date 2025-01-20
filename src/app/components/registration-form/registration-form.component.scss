@@ -129,6 +129,10 @@ span[aria-live="polite"] {
   }
 }
 
+li.is-valid {
+  color: $success-color;
+}
+
 /* Asegurar accesibilidad en dispositivos móviles */
 @media (max-width: 600px) {
   body {

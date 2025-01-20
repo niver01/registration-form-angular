@@ -1,19 +1,42 @@
-# RegistrationForm
+# **Formulario de Registro - Implementación en Angular**
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.2.
 
-## Page link
+## Enlace de página
 
-[Form page](https://678d735504bb72a99309b39d--incomparable-naiad-778dbd.netlify.app/)
+[Ir al enlace](https://678d735504bb72a99309b39d--incomparable-naiad-778dbd.netlify.app/)
 
-## Development server
+# **Reporte de Accesibilidad - Cumplimiento de WCAG 2.1**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### **1. Principio: Perceptible**
 
-## Build
+- **Etiquetas accesibles:** Uso de `<label>` asociado a los campos mediante `for` y `formControlName`.
+- **Mensajes de error accesibles:** Implementados con `aria-describedby` y anunciados dinámicamente con `aria-live="polite"`.
+- **Contraste:** Verificado con herramientas para cumplir con WCAG AA.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### **2. Principio: Operable**
 
-## Running unit tests
+- **Navegación por teclado:** Fluida y con orden lógico gracias a `[appFocusNext]`.
+- **Retroalimentación visual:** Errores destacados mediante `is-invalid` y mensajes claros.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### **3. Principio: Comprensible**
+
+- **Validaciones en tiempo real:** Mensajes claros y criterios específicos visibles (e.g., requisitos de contraseña).
+- **Semántica clara:** Uso de `<fieldset>` y `<legend>` para agrupar campos relacionados.
+
+### **4. Principio: Robusto**
+
+- **Compatibilidad:** Con **NVDA** y herramientas como **WAVE** y **Lighthouse**.
+- **HTML semántico:** Uso de etiquetas estándar y atributos ARIA (`aria-describedby`, `aria-invalid`, `aria-live`).
+
+### **Resultados de Pruebas**
+
+- **Herramientas utilizadas:**
+  - **WAVE:** Sin errores críticos.
+  - **Lighthouse:** Cumple con WCAG 2.1 AA.
+
+### **Conclusión**
+
+La solución cumple con los estándares **WCAG 2.1 AA**, garantizando una experiencia accesible, clara y robusta para todos los usuarios.
+
+![alt text](image.png)

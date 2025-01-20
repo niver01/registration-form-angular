@@ -68,13 +68,7 @@ export class RegistrationFormComponent {
       documentType: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      phone: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^9\d{8}$/), // Ejemplo: 985635698
-        ],
-      ],
+      phone: ['', [Validators.required]],
       password: [
         '',
         [
@@ -131,13 +125,33 @@ export class RegistrationFormComponent {
       },
       phone: {
         required: 'Ingrese su número de celular',
-        pattern: 'Ingrese un número de teléfono válido para',
+        pattern: 'Ingrese un número de teléfono válido',
       },
       password: {
         required: 'Ingrese una contraseña segura',
         pattern: 'Ingrese una contraseña que cumpla con los criterios',
       },
     });
+  });
+
+  hasLowercase = computed(() => {
+    const password = this.observerForm$()?.password;
+    return password && /[a-z]/.test(password);
+  });
+
+  hasUppercase = computed(() => {
+    const password = this.observerForm$()?.password;
+    return password && /[A-Z]/.test(password);
+  });
+
+  hasNumber = computed(() => {
+    const password = this.observerForm$()?.password;
+    return password && /\d/.test(password);
+  });
+
+  hasSpecialChar = computed(() => {
+    const password = this.observerForm$()?.password;
+    return password && /[@$!%*?&]/.test(password);
   });
 
   onSubmit(): void {

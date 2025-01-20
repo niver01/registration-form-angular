@@ -271,9 +271,9 @@
         aria-live="polite"
       >
         {{ errorMessages$()?.phone }}
-        @if (registrationForm.get("phone")?.errors?.['pattern']) {
+        <!-- @if (registrationForm.get("phone")?.errors?.['pattern']) {
         {{ registrationForm.get("country")?.value }}
-        }
+        } -->
       </span>
     </div>
 
@@ -298,11 +298,24 @@
       <div id="password-criteria" class="password-criteria">
         La contraseña debe contener:
         <ul>
-          <li>Al menos 8 caracteres</li>
-          <li>Al menos una letra mayúscula</li>
-          <li>Al menos una letra minúscula</li>
-          <li>Al menos un número</li>
-          <li>Al menos un carácter especial {{ "(@$!%*?&)" }}</li>
+          <li
+            [ngClass]="{
+              'is-valid':
+                (registrationForm.get('password')?.value?.length ?? 0) >= 8
+            }"
+          >
+            Al menos 8 caracteres
+          </li>
+          <li [ngClass]="{ 'is-valid': hasLowercase() }">
+            Al menos una letra minúscula
+          </li>
+          <li [ngClass]="{ 'is-valid': hasUppercase() }">
+            Al menos una letra mayúscula
+          </li>
+          <li [ngClass]="{ 'is-valid': hasNumber() }">Al menos un número</li>
+          <li [ngClass]="{ 'is-valid': hasSpecialChar() }">
+            Al menos un carácter especial {{ "(@$!%*?&)" }}
+          </li>
         </ul>
       </div>
       <span
