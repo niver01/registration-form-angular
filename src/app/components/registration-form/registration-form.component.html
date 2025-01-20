@@ -1,0 +1,323 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+  <h1>Formulario de Registro</h1>
+  <!-- Grupo: Información Personal -->
+  <fieldset>
+    <legend>Información Personal</legend>
+
+    <div class="grid">
+      <div>
+        <label for="firstName">Nombres</label>
+        <input
+          id="firstName"
+          [appFocusNext]="lastName"
+          formControlName="firstName"
+          [attr.aria-describedby]="'firstName-error'"
+          [attr.aria-invalid]="
+            registrationForm.get('firstName')?.invalid ? 'true' : null
+          "
+          [ngClass]="{
+            'is-invalid':
+              registrationForm.get('firstName')?.invalid &&
+              registrationForm.get('firstName')?.touched
+          }"
+        />
+        <span
+          id="firstName-error"
+          *ngIf="
+            registrationForm.get('firstName')?.invalid &&
+            registrationForm.get('firstName')?.touched
+          "
+          aria-live="polite"
+        >
+          {{ errorMessages$()?.firstName }}
+        </span>
+      </div>
+
+      <div>
+        <label for="lastName">Apellidos</label>
+        <input
+          #lastName
+          id="lastName"
+          [appFocusNext]="email"
+          formControlName="lastName"
+          [attr.aria-describedby]="'lastName-error'"
+          [attr.aria-invalid]="
+            registrationForm.get('lastName')?.invalid ? 'true' : null
+          "
+          [ngClass]="{
+            'is-invalid':
+              registrationForm.get('lastName')?.invalid &&
+              registrationForm.get('lastName')?.touched
+          }"
+        />
+        <span
+          id="lastName-error"
+          *ngIf="
+            registrationForm.get('lastName')?.invalid &&
+            registrationForm.get('lastName')?.touched
+          "
+          aria-live="polite"
+        >
+          {{ errorMessages$()?.lastName }}
+        </span>
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Correo Electrónico</label>
+      <input
+        #email
+        id="email"
+        [appFocusNext]="documentType"
+        placeholder="example@gmail.com"
+        formControlName="email"
+        type="email"
+        inputmode="email"
+        [attr.aria-describedby]="'email-error'"
+        [attr.aria-invalid]="
+          registrationForm.get('email')?.invalid ? 'true' : null
+        "
+        [ngClass]="{
+          'is-invalid':
+            registrationForm.get('email')?.invalid &&
+            registrationForm.get('email')?.touched
+        }"
+      />
+      <span
+        id="email-error"
+        *ngIf="
+          registrationForm.get('email')?.invalid &&
+          registrationForm.get('email')?.touched
+        "
+        aria-live="polite"
+      >
+        {{ errorMessages$()?.email }}
+      </span>
+    </div>
+  </fieldset>
+
+  <!-- Grupo: Datos Necesarios -->
+  <fieldset>
+    <legend>Datos Necesarios</legend>
+
+    <div class="grid">
+      <div>
+        <label for="documentType">Tipo de Documento</label>
+        <select
+          #documentType
+          id="documentType"
+          [appFocusNext]="documentNumber"
+          formControlName="documentType"
+          [attr.aria-describedby]="'documentType-error'"
+          [attr.aria-invalid]="
+            registrationForm.get('documentType')?.invalid ? 'true' : null
+          "
+          [ngClass]="{
+            'is-invalid':
+              registrationForm.get('documentType')?.invalid &&
+              registrationForm.get('documentType')?.touched
+          }"
+        >
+          <option value="">Seleccione...</option>
+          <option
+            *ngFor="let documentType of documentsType"
+            [value]="documentType"
+          >
+            {{ documentType }}
+          </option>
+        </select>
+        <span
+          id="documentType-error"
+          *ngIf="
+            registrationForm.get('documentType')?.invalid &&
+            registrationForm.get('documentType')?.touched
+          "
+          aria-live="polite"
+        >
+          {{ errorMessages$()?.documentType }}
+        </span>
+      </div>
+
+      <div>
+        <label for="documentNumber">Número de Documento</label>
+        <input
+          #documentNumber
+          id="documentNumber"
+          [appFocusNext]="gender"
+          formControlName="documentNumber"
+          appNumericOnly
+          maxlength="12"
+          inputmode="numeric"
+          [attr.aria-describedby]="'documentNumber-error'"
+          [attr.aria-invalid]="
+            registrationForm.get('documentNumber')?.invalid ? 'true' : null
+          "
+          [ngClass]="{
+            'is-invalid':
+              registrationForm.get('documentNumber')?.invalid &&
+              registrationForm.get('documentNumber')?.touched
+          }"
+        />
+        <span
+          id="documentNumber-error"
+          *ngIf="
+            registrationForm.get('documentNumber')?.invalid &&
+            registrationForm.get('documentNumber')?.touched
+          "
+          aria-live="polite"
+        >
+          {{ errorMessages$()?.documentNumber }}
+        </span>
+      </div>
+
+      <div>
+        <label for="gender">Identidad de Género</label>
+        <select
+          #gender
+          id="gender"
+          [appFocusNext]="country"
+          formControlName="gender"
+          [attr.aria-describedby]="'gender-error'"
+          [attr.aria-invalid]="
+            registrationForm.get('gender')?.invalid ? 'true' : null
+          "
+          [ngClass]="{
+            'is-invalid':
+              registrationForm.get('gender')?.invalid &&
+              registrationForm.get('gender')?.touched
+          }"
+        >
+          <option value="">Seleccione...</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+        <span
+          id="gender-error"
+          *ngIf="
+            registrationForm.get('gender')?.invalid &&
+            registrationForm.get('gender')?.touched
+          "
+          aria-live="polite"
+        >
+          {{ errorMessages$()?.gender }}
+        </span>
+      </div>
+
+      <div>
+        <label for="country">País</label>
+        <select
+          #country
+          id="country"
+          [appFocusNext]="phone"
+          formControlName="country"
+          [attr.aria-describedby]="'country-error'"
+          [attr.aria-invalid]="
+            registrationForm.get('country')?.invalid ? 'true' : null
+          "
+          [ngClass]="{
+            'is-invalid':
+              registrationForm.get('country')?.invalid &&
+              registrationForm.get('country')?.touched
+          }"
+        >
+          <option value="">Seleccione...</option>
+          <option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </option>
+        </select>
+        <span
+          id="country-error"
+          *ngIf="
+            registrationForm.get('country')?.invalid &&
+            registrationForm.get('country')?.touched
+          "
+          aria-live="polite"
+        >
+          {{ errorMessages$()?.country }}
+        </span>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- Grupo: Seguridad -->
+  <fieldset>
+    <legend>Seguridad</legend>
+
+    <div>
+      <label for="phone">Teléfono Celular</label>
+      <input
+        #phone
+        id="phone"
+        [appFocusNext]="password"
+        formControlName="phone"
+        appNumericOnly
+        inputmode="tel"
+        [attr.aria-describedby]="'phone-error'"
+        [attr.aria-invalid]="
+          registrationForm.get('phone')?.invalid ? 'true' : null
+        "
+        [ngClass]="{
+          'is-invalid':
+            registrationForm.get('phone')?.invalid &&
+            registrationForm.get('phone')?.touched
+        }"
+      />
+      <span
+        id="phone-error"
+        *ngIf="
+          registrationForm.get('phone')?.invalid &&
+          registrationForm.get('phone')?.touched
+        "
+        aria-live="polite"
+      >
+        {{ errorMessages$()?.phone }}
+        @if (registrationForm.get("phone")?.errors?.['pattern']) {
+        {{ registrationForm.get("country")?.value }}
+        }
+      </span>
+    </div>
+
+    <div>
+      <label for="password">Contraseña</label>
+      <input
+        #password
+        id="password"
+        formControlName="password"
+        type="password"
+        [attr.aria-describedby]="'password-criteria password-error'"
+        [attr.aria-invalid]="
+          registrationForm.get('password')?.invalid ? 'true' : null
+        "
+        [ngClass]="{
+          'is-invalid':
+            registrationForm.get('password')?.invalid &&
+            registrationForm.get('password')?.touched
+        }"
+      />
+      <!-- Mensaje de criterios -->
+      <div id="password-criteria" class="password-criteria">
+        La contraseña debe contener:
+        <ul>
+          <li>Al menos 8 caracteres</li>
+          <li>Al menos una letra mayúscula</li>
+          <li>Al menos una letra minúscula</li>
+          <li>Al menos un número</li>
+          <li>Al menos un carácter especial {{ "(@$!%*?&)" }}</li>
+        </ul>
+      </div>
+      <span
+        id="password-error"
+        *ngIf="
+          registrationForm.get('password')?.invalid &&
+          registrationForm.get('password')?.touched
+        "
+        aria-live="polite"
+      >
+        {{ errorMessages$()?.password }}
+      </span>
+    </div>
+  </fieldset>
+
+  <!-- Botón de Envío -->
+  <button type="submit" [disabled]="registrationForm.invalid">Registrar</button>
+</form>
