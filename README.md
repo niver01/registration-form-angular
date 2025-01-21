@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Enlace de página
 
-[Ir al enlace](https://678d735504bb72a99309b39d--incomparable-naiad-778dbd.netlify.app/)
+[Ir al enlace](https://incomparable-naiad-778dbd.netlify.app/)
 
 # **Reporte de Accesibilidad - Cumplimiento de WCAG 2.1**
 
