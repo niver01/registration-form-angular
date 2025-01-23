@@ -11,22 +11,17 @@
           id="firstName"
           [appFocusNext]="lastName"
           formControlName="firstName"
+          required
+          aria-required="true"
           [attr.aria-describedby]="'firstName-error'"
-          [attr.aria-invalid]="
-            registrationForm.get('firstName')?.invalid ? 'true' : null
-          "
+          [attr.aria-invalid]="invalid$.firstName() ? 'true' : null"
           [ngClass]="{
-            'is-invalid':
-              registrationForm.get('firstName')?.invalid &&
-              registrationForm.get('firstName')?.touched
+            'is-invalid': invalid$.firstName()
           }"
         />
         <span
           id="firstName-error"
-          *ngIf="
-            registrationForm.get('firstName')?.invalid &&
-            registrationForm.get('firstName')?.touched
-          "
+          *ngIf="invalid$.firstName()"
           aria-live="polite"
         >
           {{ errorMessages$()?.firstName }}
@@ -40,22 +35,17 @@
           id="lastName"
           [appFocusNext]="email"
           formControlName="lastName"
+          required
+          aria-required="true"
           [attr.aria-describedby]="'lastName-error'"
-          [attr.aria-invalid]="
-            registrationForm.get('lastName')?.invalid ? 'true' : null
-          "
+          [attr.aria-invalid]="invalid$.lastName() ? 'true' : null"
           [ngClass]="{
-            'is-invalid':
-              registrationForm.get('lastName')?.invalid &&
-              registrationForm.get('lastName')?.touched
+            'is-invalid': invalid$.lastName()
           }"
         />
         <span
           id="lastName-error"
-          *ngIf="
-            registrationForm.get('lastName')?.invalid &&
-            registrationForm.get('lastName')?.touched
-          "
+          *ngIf="invalid$.lastName()"
           aria-live="polite"
         >
           {{ errorMessages$()?.lastName }}
@@ -73,24 +63,15 @@
         formControlName="email"
         type="email"
         inputmode="email"
+        required
+        aria-required="true"
         [attr.aria-describedby]="'email-error'"
-        [attr.aria-invalid]="
-          registrationForm.get('email')?.invalid ? 'true' : null
-        "
+        [attr.aria-invalid]="invalid$.email() ? 'true' : null"
         [ngClass]="{
-          'is-invalid':
-            registrationForm.get('email')?.invalid &&
-            registrationForm.get('email')?.touched
+          'is-invalid': invalid$.email()
         }"
       />
-      <span
-        id="email-error"
-        *ngIf="
-          registrationForm.get('email')?.invalid &&
-          registrationForm.get('email')?.touched
-        "
-        aria-live="polite"
-      >
+      <span id="email-error" *ngIf="invalid$.email()" aria-live="polite">
         {{ errorMessages$()?.email }}
       </span>
     </div>
@@ -108,14 +89,12 @@
           id="documentType"
           [appFocusNext]="documentNumber"
           formControlName="documentType"
+          required
+          aria-required="true"
           [attr.aria-describedby]="'documentType-error'"
-          [attr.aria-invalid]="
-            registrationForm.get('documentType')?.invalid ? 'true' : null
-          "
+          [attr.aria-invalid]="invalid$.documentType() ? 'true' : null"
           [ngClass]="{
-            'is-invalid':
-              registrationForm.get('documentType')?.invalid &&
-              registrationForm.get('documentType')?.touched
+            'is-invalid': invalid$.documentType()
           }"
         >
           <option value="">Seleccione...</option>
@@ -128,10 +107,7 @@
         </select>
         <span
           id="documentType-error"
-          *ngIf="
-            registrationForm.get('documentType')?.invalid &&
-            registrationForm.get('documentType')?.touched
-          "
+          *ngIf="invalid$.documentType()"
           aria-live="polite"
         >
           {{ errorMessages$()?.documentType }}
@@ -148,22 +124,17 @@
           appNumericOnly
           maxlength="12"
           inputmode="numeric"
+          required
+          aria-required="true"
           [attr.aria-describedby]="'documentNumber-error'"
-          [attr.aria-invalid]="
-            registrationForm.get('documentNumber')?.invalid ? 'true' : null
-          "
+          [attr.aria-invalid]="invalid$.documentNumber() ? 'true' : null"
           [ngClass]="{
-            'is-invalid':
-              registrationForm.get('documentNumber')?.invalid &&
-              registrationForm.get('documentNumber')?.touched
+            'is-invalid': invalid$.documentNumber()
           }"
         />
         <span
           id="documentNumber-error"
-          *ngIf="
-            registrationForm.get('documentNumber')?.invalid &&
-            registrationForm.get('documentNumber')?.touched
-          "
+          *ngIf="invalid$.documentNumber()"
           aria-live="polite"
         >
           {{ errorMessages$()?.documentNumber }}
@@ -177,28 +148,19 @@
           id="gender"
           [appFocusNext]="country"
           formControlName="gender"
+          required
+          aria-required="true"
           [attr.aria-describedby]="'gender-error'"
-          [attr.aria-invalid]="
-            registrationForm.get('gender')?.invalid ? 'true' : null
-          "
+          [attr.aria-invalid]="invalid$.gender() ? 'true' : null"
           [ngClass]="{
-            'is-invalid':
-              registrationForm.get('gender')?.invalid &&
-              registrationForm.get('gender')?.touched
+            'is-invalid': invalid$.gender()
           }"
         >
           <option value="">Seleccione...</option>
           <option value="Masculino">Masculino</option>
           <option value="Femenino">Femenino</option>
         </select>
-        <span
-          id="gender-error"
-          *ngIf="
-            registrationForm.get('gender')?.invalid &&
-            registrationForm.get('gender')?.touched
-          "
-          aria-live="polite"
-        >
+        <span id="gender-error" *ngIf="invalid$.gender()" aria-live="polite">
           {{ errorMessages$()?.gender }}
         </span>
       </div>
@@ -210,14 +172,12 @@
           id="country"
           [appFocusNext]="phone"
           formControlName="country"
+          required
+          aria-required="true"
           [attr.aria-describedby]="'country-error'"
-          [attr.aria-invalid]="
-            registrationForm.get('country')?.invalid ? 'true' : null
-          "
+          [attr.aria-invalid]="invalid$.country() ? 'true' : null"
           [ngClass]="{
-            'is-invalid':
-              registrationForm.get('country')?.invalid &&
-              registrationForm.get('country')?.touched
+            'is-invalid': invalid$.country()
           }"
         >
           <option value="">Seleccione...</option>
@@ -225,14 +185,7 @@
             {{ country }}
           </option>
         </select>
-        <span
-          id="country-error"
-          *ngIf="
-            registrationForm.get('country')?.invalid &&
-            registrationForm.get('country')?.touched
-          "
-          aria-live="polite"
-        >
+        <span id="country-error" *ngIf="invalid$.country()" aria-live="polite">
           {{ errorMessages$()?.country }}
         </span>
       </div>
@@ -252,24 +205,15 @@
         formControlName="phone"
         appNumericOnly
         inputmode="tel"
+        required
+        aria-required="true"
         [attr.aria-describedby]="'phone-error'"
-        [attr.aria-invalid]="
-          registrationForm.get('phone')?.invalid ? 'true' : null
-        "
+        [attr.aria-invalid]="invalid$.phone() ? 'true' : null"
         [ngClass]="{
-          'is-invalid':
-            registrationForm.get('phone')?.invalid &&
-            registrationForm.get('phone')?.touched
+          'is-invalid': invalid$.phone()
         }"
       />
-      <span
-        id="phone-error"
-        *ngIf="
-          registrationForm.get('phone')?.invalid &&
-          registrationForm.get('phone')?.touched
-        "
-        aria-live="polite"
-      >
+      <span id="phone-error" *ngIf="invalid$.phone()" aria-live="polite">
         {{ errorMessages$()?.phone }}
         <!-- @if (registrationForm.get("phone")?.errors?.['pattern']) {
         {{ registrationForm.get("country")?.value }}
@@ -284,14 +228,12 @@
         id="password"
         formControlName="password"
         type="password"
+        required
+        aria-required="true"
         [attr.aria-describedby]="'password-criteria password-error'"
-        [attr.aria-invalid]="
-          registrationForm.get('password')?.invalid ? 'true' : null
-        "
+        [attr.aria-invalid]="invalid$.password() ? 'true' : null"
         [ngClass]="{
-          'is-invalid':
-            registrationForm.get('password')?.invalid &&
-            registrationForm.get('password')?.touched
+          'is-invalid': invalid$.password()
         }"
       />
       <!-- Mensaje de criterios -->
@@ -318,14 +260,7 @@
           </li>
         </ul>
       </div>
-      <span
-        id="password-error"
-        *ngIf="
-          registrationForm.get('password')?.invalid &&
-          registrationForm.get('password')?.touched
-        "
-        aria-live="polite"
-      >
+      <span id="password-error" *ngIf="invalid$.password()" aria-live="polite">
         {{ errorMessages$()?.password }}
       </span>
     </div>

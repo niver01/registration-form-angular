@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  ControlEvent,
 } from '@angular/forms';
 import { errorMessage, TypeForm } from '../../utils/form';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -22,6 +23,8 @@ type FormData = {
   phone: string;
   password: string;
 };
+
+type Error = { [K in keyof FormData]: Signal<boolean> };
 
 const phoneNumberPatterns: { [key: string]: RegExp } = {
   Perú: /^9\d{8}$/,
@@ -53,10 +56,13 @@ export class RegistrationFormComponent {
   registrationForm!: FormGroup<TypeForm<FormData>>;
   observerForm$!: Signal<Partial<FormData> | undefined>;
 
+  invalid$!: Error;
+
   constructor(
     private readonly _nonNullableFormBuilder: NonNullableFormBuilder
   ) {
     this.buildForm();
+    this.createEventObservers();
   }
 
   buildForm(): void {
@@ -94,6 +100,36 @@ export class RegistrationFormComponent {
       ]);
       this.registrationForm.controls.phone.reset();
     });
+  }
+
+  createEventObservers(): void {
+    const signalEvents = Object.keys(this.registrationForm.value).reduce(
+      (acc, key) => {
+        if (key in this.registrationForm.controls) {
+          acc[key as keyof FormData] = toSignal(
+            this.registrationForm.controls[key as keyof FormData].events
+          );
+        }
+        return acc;
+      },
+      {} as { [K in keyof FormData]: Signal<ControlEvent<string> | undefined> }
+    );
+
+    this.invalid$ = Object.keys(this.registrationForm.value).reduce(
+      (acc, key) => {
+        if (key in this.registrationForm.controls) {
+          acc[key as keyof FormData] = computed(() => {
+            signalEvents[key as keyof FormData]();
+            return (
+              this.registrationForm.controls[key as keyof FormData].invalid &&
+              this.registrationForm.controls[key as keyof FormData].touched
+            );
+          });
+        }
+        return acc;
+      },
+      {} as { [K in keyof FormData]: Signal<boolean> }
+    );
   }
 
   errorMessages$: Signal<Partial<FormData> | null> = computed(() => {
